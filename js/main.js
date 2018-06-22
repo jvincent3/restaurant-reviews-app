@@ -10,7 +10,25 @@ var markers = []
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
+  registerServiceWorker();
 });
+
+
+/**
+*
+* Register Service Worker
+*/
+registerServiceWorker = () => {
+  if (!navigator.serviceWorker) return;
+
+  navigator.serviceWorker.register('/js/sw/sw.js').then(function(reg) {
+    console.log('Registration Worked!');
+    reg.installing;
+  }).catch(function(err) {
+    console.log('Registration failed!', err);
+  })
+
+}
 
 /**
  * Fetch all neighborhoods and set their HTML.
@@ -141,6 +159,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `An image of ${restaurant.name}`;
   li.append(image);
 
   const name = document.createElement('h1');
