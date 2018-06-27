@@ -58,6 +58,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `an Image of ${restaurant.name}`
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -117,21 +118,33 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
+  //create div here and append the P inside
+  const topbar = document.createElement('div');
+  topbar.classList.add('topbar');
+  li.append(topbar);
+  const main = document.createElement('div');
+  main.classList.add('main');
+  li.append(main);
+
   const name = document.createElement('p');
   name.innerHTML = review.name;
-  li.appendChild(name);
+  name.style.float = 'left';
+  name.style.fontSize = '20px'
+  topbar.appendChild(name);
 
   const date = document.createElement('p');
+  date.style.float = 'right';
   date.innerHTML = review.date;
-  li.appendChild(date);
+  topbar.appendChild(date);
 
-  const rating = document.createElement('p');
+  const rating = document.createElement('a');
   rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
+  rating.classList.add('rating');
+  main.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
-  li.appendChild(comments);
+  main.appendChild(comments);
 
   return li;
 }
