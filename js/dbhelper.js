@@ -11,9 +11,9 @@ class DBHelper {
     const port = window.location.host // Change this to your server port
 
     if (port == "jvincent3.github.io") {
-      return `http://${port}/restaurant-reviews-app/data/restaurants.json`;
+      return `https://${port}/restaurant-reviews-app/data/restaurants.json`;
     } else {
-      return `http://${port}/data/restaurants.json`;
+      return `https://${port}/data/restaurants.json`;
     }
   }
 
