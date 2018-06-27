@@ -10,7 +10,7 @@ var markers = []
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
-  registerServiceWorker();
+  //registerServiceWorker();
 });
 
 
@@ -21,9 +21,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
 registerServiceWorker = () => {
   if (!navigator.serviceWorker) return;
 
-  navigator.serviceWorker.register('/js/sw/sw.js').then(function(reg) {
-    console.log('Registration Worked!');
-    reg.installing;
+  navigator.serviceWorker.register('/js/sw/sw.js').then((reg) => {
+
+    if (reg.intalling) {
+      console.log('Service worker installing');
+    } else if (reg.waiting) {
+      console.log('Service worker waiting');
+    } else if (reg.active) {
+      console.log('Service worker active')
+    }
+
+    console.log('Registration completed!');
   }).catch(function(err) {
     console.log('Registration failed!', err);
   })
