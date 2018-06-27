@@ -9,7 +9,12 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = window.location.host // Change this to your server port
-    return `http://${port}/data/restaurants.json`;
+
+    if (port == "jvincent3.github.io") {
+      return `http://${port}/restaurant-reviews-app/data/restaurants.json`;
+    } else {
+      return `http://${port}/data/restaurants.json`;
+    }
   }
 
   /**
